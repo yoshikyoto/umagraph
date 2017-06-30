@@ -30,6 +30,7 @@ for horse,odds in result.iteritems():
     print odds
     x = numpy.array(odds.keys())
     y = numpy.array(odds.values())
-    plt.plot(x, y)
+    p = plt.plot(x, y, label=horse)
 
+plt.legend(range(1, len(result) + 1))
 plt.savefig('../graph/' + racename + '.png')
