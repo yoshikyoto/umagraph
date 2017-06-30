@@ -1,17 +1,20 @@
 # coding: utf-8
 
 require '../../infra/keiba/keiba_client'
+require '../../infra/data/csv_file'
 require './entity/race'
 require './entity/horce'
 require './entity/race_horse'
 require './entity/jockey'
+require 'date'
 
 class KeibaRepository
 
   def initialize()
     @client = KeibaClient.new()
+    @csv = CsvFile.new()
   end
-  
+
   def main_races()
     list = @client.get_main_race_list
     list.map{|race_hash|
@@ -32,4 +35,20 @@ class KeibaRepository
       Race.new(race_hash[:name], race_horses)
     }
   end
+
+  def output_csv(race, time)
+    puts race.name
+    data = race.race_horses.map{|race_horse|
+      [
+        race_horse.horse.name,
+        race_horse.odds,
+      ]
+    }
+    @csv.save(race.name, time, data)
+  end
 end
+
+r = KeibaRepository.new()
+race = r.main_races[0]
+r.output_csv(race, Time.now.to_i)
+
