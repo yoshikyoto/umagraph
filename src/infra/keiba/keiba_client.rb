@@ -53,8 +53,8 @@ class KeibaClient
       jockey_name = jockey_dom.content.strip
       jockey_url = jockey_dom.attributes['href'].value.strip
 
-      odds = dom.css('td')[7].content.strip.to_f
-      popularity = dom.css('td')[8].content.strip.to_i
+      odds = dom.css('td')[8].content.strip.to_f
+      popularity = dom.css('td')[9].content.strip.to_i
 
       {
         waku: waku,
