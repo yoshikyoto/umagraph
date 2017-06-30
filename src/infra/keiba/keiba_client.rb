@@ -27,15 +27,10 @@ class KeibaClient
   def get_main_race_list()
     page = get_params({acc_param: 'race'})
     page.css('.today_mainrace').map{|race_dom|
-      hash = parse_race(race_dom)
-      puts get_race_detail(hash[:path], hash[:name])
-    }
-  end
-
-  def parse_race(race_dom)
-    {
-      name: race_dom.css('.racename > a').first.content,
-      path: race_dom.css('.racename > a').first.attributes['href'].value,
+      {
+        name: race_dom.css('.racename > a').first.content,
+        path: race_dom.css('.racename > a').first.attributes['href'].value,
+      }
     }
   end
 
@@ -44,15 +39,15 @@ class KeibaClient
     page.css('.bml1').map{|dom|
       waku = dom.css('td > span').first.content.strip.to_i
       num = dom.css('.umaban').first.content.strip.to_i
-      
+
       horse_name_dom = dom.css('.horsename a').first
       name = horse_name_dom.content.strip
       url = horse_name_dom.attributes['href'].value.strip
-      
+
       sex_age = dom.css('td')[4].content.strip.split("")
       sex = sex_age[0]
       age = sex_age[1].to_i
-      
+
       burden = dom.css('td')[5].content.strip.to_f
       jockey_dom = dom.css('td')[6].css('a').first
       jockey_name = jockey_dom.content.strip
@@ -60,6 +55,7 @@ class KeibaClient
 
       odds = dom.css('td')[7].content.strip.to_f
       popularity = dom.css('td')[8].content.strip.to_i
+
       {
         waku: waku,
         num: num,
