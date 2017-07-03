@@ -1,11 +1,11 @@
 # coding: utf-8
 
-require '../../infra/keiba/keiba_client'
-require '../../infra/data/csv_file'
-require './entity/race'
-require './entity/horce'
-require './entity/race_horse'
-require './entity/jockey'
+require_relative '../../infra/keiba/keiba_client'
+require_relative '../../infra/data/csv_file'
+require_relative './entity/race'
+require_relative './entity/horce'
+require_relative './entity/race_horse'
+require_relative './entity/jockey'
 require 'date'
 
 class KeibaRepository
@@ -51,11 +51,3 @@ class KeibaRepository
     @csv.save(race.name, time, data)
   end
 end
-
-r = KeibaRepository.new()
-race = r.main_races[0]
-r.output_csv(race, Time.now.to_i)
-
-race = r.race('/?pid=race_old&id=c201703020106', '福島6R２歳新馬')
-r.output_csv(race, Time.now.to_i)
-
