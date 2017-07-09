@@ -1,0 +1,29 @@
+<% provide(:title, @race.name) %>
+<h1><%= @race.name %></h1>
+<table border=1>
+  <% @race.race_horses.each do |num, race_horse| %>
+  <tr>
+    <td class="waku waku<%= race_horse.waku %>">
+      <%= race_horse.waku %>
+    </td>
+    <td class="num num-<%= race_horse.num %>">
+      <%= race_horse.num %>
+    </td>
+    <td class="norse-name">
+      <%= race_horse.horse.name %>
+    </td>
+    <td class="jockey">
+      <%= race_horse.jockey.name %>
+    </td>
+    <td class="burden">
+      <%= race_horse.burden %>
+    </td>
+    <td class="odds popularity-<%= race_horse.popularity %>">
+      <%= race_horse.odds %>
+    </td>
+    <td class="popularity popularity-<% race_horse.popularity %>">
+      <%= race_horse.popularity %>人気
+    </td>
+  </tr>
+  <% end %>
+</table>
